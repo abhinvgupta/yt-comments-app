@@ -11,13 +11,13 @@ function App() {
     event.preventDefault(); 
   
     const formData = new FormData(event.target);
-    const videoId = formData.get('video-input');
+    const videoUrl = formData.get('video-input');
   
-    console.log(videoId);
+    console.log(videoUrl);
     setLoading(true);
   
     try {
-      const response = await axios.get(`http://13.49.238.235:3000/comments?videoId=${videoId}`);
+      const response = await axios.get(`http://13.49.238.235:3000/comments?videoUrl=${videoUrl}`);
       setSummary(response.data.aiSummary);
     } catch (err) {
       console.error(err);
