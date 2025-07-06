@@ -2,6 +2,14 @@ import { useState } from 'react'
 import axios from 'axios'
 
 import './App.css'
+const env = import.meta.env.VITE_ENV;
+let API_URL;
+console.log(env,'env')
+if (env === "development") {
+     API_URL = "http://localhost:3000";      
+} else {
+     API_URL = "http://13.49.238.235:3000";
+}
 
 function App() {
   const [summary, setSummary] = useState('')
@@ -17,7 +25,7 @@ function App() {
     setLoading(true);
   
     try {
-      const response = await axios.get(`http://13.49.238.235:3000/comments?videoUrl=${videoUrl}`);
+      const response = await axios.get(`${API_URL}/comments?videoUrl=${videoUrl}`);
       setSummary(response.data.aiSummary);
     } catch (err) {
       console.error(err);
